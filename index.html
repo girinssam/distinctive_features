@@ -633,30 +633,6 @@ const Q2_DATA = [
   {feat:'원순성',ans:'원순모음(ㅜ·ㅗ)과 활음 w',choices:['원순모음(ㅜ·ㅗ)과 활음 w','ㅣ·ㅡ·ㅏ','비음 전체','ㅓ·ㅔ·ㅐ']},
 ];
 
-const PAIR_QUIZ = [
-  {p1:'ㅂ',p2:'ㅃ',keys:['긴장성'],hint:'두 음소 모두 양순 파열음이에요. 발음 세기(후두 근육 긴장)의 차이를 생각해보세요.'},
-  {p1:'ㅂ',p2:'ㅍ',keys:['긴장성','기식성'],hint:'두 음소 모두 양순 파열음이에요. 기식 여부와 긴장 여부를 확인해보세요.'},
-  {p1:'ㅃ',p2:'ㅍ',keys:['기식성'],hint:'둘 다 긴장성 +인 양순음이에요. 기식(거센 숨) 여부가 다릅니다.'},
-  {p1:'ㄷ',p2:'ㄸ',keys:['긴장성'],hint:'두 음소 모두 치조 파열음이에요. 후두 근육 긴장도를 생각해보세요.'},
-  {p1:'ㄷ',p2:'ㅌ',keys:['긴장성','기식성'],hint:'두 음소 모두 치조 파열음이에요. 긴장성과 기식성을 확인해보세요.'},
-  {p1:'ㅅ',p2:'ㅆ',keys:['긴장성'],hint:'두 음소 모두 치조 마찰음이에요. 발음할 때 후두 근육 긴장도가 달라요.'},
-  {p1:'ㄱ',p2:'ㄲ',keys:['긴장성'],hint:'두 음소 모두 연구개 파열음이에요. 경음과 평음의 차이를 생각해보세요.'},
-  {p1:'ㄱ',p2:'ㅋ',keys:['긴장성','기식성'],hint:'두 음소 모두 연구개 파열음이에요. 긴장성과 기식성 값을 확인해보세요.'},
-  {p1:'ㄲ',p2:'ㅋ',keys:['기식성'],hint:'둘 다 연구개음이고 긴장성은 같아요. 기식 여부만 달라요.'},
-  {p1:'ㅈ',p2:'ㅉ',keys:['긴장성'],hint:'두 음소 모두 치경구개 파찰음이에요. 평음과 경음의 차이예요.'},
-  {p1:'ㅈ',p2:'ㅊ',keys:['긴장성','기식성'],hint:'두 음소 모두 치경구개 파찰음이에요. 긴장성과 기식성을 확인해보세요.'},
-  {p1:'ㅂ',p2:'ㄷ',keys:['설정성','전방성'],hint:'두 음소 모두 평음 파열음이에요. 조음 위치(입술 vs 치조)에서 차이가 나요.'},
-  {p1:'ㄷ',p2:'ㄱ',keys:['설정성','전방성','고설성','후설성'],hint:'두 음소 모두 평음 파열음이에요. 치조음 vs 연구개음의 차이를 생각해보세요.'},
-  {p1:'ㅁ',p2:'ㅂ',keys:['공명성'],hint:'두 음소 모두 양순음이에요. 비강으로 공기가 흐르는지 여부가 달라요.'},
-  {p1:'ㄴ',p2:'ㄷ',keys:['공명성'],hint:'두 음소 모두 치조음이에요. 비음과 파열음의 차이를 생각해보세요.'},
-  {p1:'ㄴ',p2:'ㄹ',keys:['설측성'],hint:'두 음소 모두 치조 공명음이에요. 공기의 통로(중앙 vs 측면) 차이예요.'},
-  {p1:'ㅣ',p2:'ㅡ',keys:['후설성'],hint:'두 모음 모두 고모음이에요. 혀의 전후 위치가 달라요.'},
-  {p1:'ㅣ',p2:'ㅜ',keys:['후설성','원순성'],hint:'두 모음 모두 고모음이에요. 혀의 위치와 입술 모양을 함께 생각해보세요.'},
-  {p1:'ㅜ',p2:'ㅡ',keys:['원순성'],hint:'두 모음 모두 후설 고모음이에요. 입술 모양이 달라요.'},
-  {p1:'ㅏ',p2:'ㅓ',keys:['저설성'],hint:'두 모음 모두 후설모음이에요. 혀의 높낮이 차이를 생각해보세요.'},
-  {p1:'j',p2:'w',keys:['후설성','원순성'],hint:'두 활음 모두 고설성 +예요. 혀의 위치와 입술 모양을 함께 생각해보세요.'},
-];
-
 function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
 
 function parseInput(s){return s.split(/[,，\s]+/).map(x=>x.trim()).filter(x=>x);}
@@ -753,42 +729,84 @@ function checkQ2(btn,ok,correct,feat){
 }
 function nextQ2(){q2Idx++;renderQ2();}
 
-// ─ 과제 3 ─
-let q3Idx=0,q3C=0,q3T=0,q3O=[];
-function initQ3(){q3O=shuffle([...Array(PAIR_QUIZ.length).keys()]);q3Idx=0;q3C=0;q3T=0;renderQ3();}
-function renderQ3(){
-  const tot=PAIR_QUIZ.length;
-  document.getElementById('prog3').style.width=Math.round(q3Idx/tot*100)+'%';
-  document.getElementById('prog3-text').textContent=q3Idx+' / '+tot;
-  document.getElementById('score3').textContent=q3C+' / '+q3T;
-  document.getElementById('q3-input').style.display='';
-  document.getElementById('q3-submit').style.display='';
-  if(q3Idx>=tot){
-    document.getElementById('q3-pair').innerHTML=`<div class="complete-box" style="width:100%"><div class="complete-emoji">🎊</div><p>모든 문제 완료!<br>최종 점수: ${q3C} / ${q3T}</p><button class="retry-btn" onclick="initQ3()">다시 풀기</button></div>`;
-    ['q3-hint','q3-guide'].forEach(id=>document.getElementById(id).textContent='');
-    document.getElementById('q3-input').style.display='none';
-    document.getElementById('q3-submit').style.display='none';
-    document.getElementById('q3-feedback').style.display='none';
-    document.getElementById('q3-ai-feedback').classList.remove('visible');
-    document.getElementById('next3').classList.remove('visible');return;
+// ─ 과제 3: 음소 쌍 자동 생성 ─
+// 두 음소 간 실제로 다른 자질 계산
+function getDiffFeats(a, b) {
+  const diffs = [];
+  for (let i = 0; i < FEAT_NAMES.length; i++) {
+    if (a.v[i] === null || b.v[i] === null) continue;
+    if (a.v[i] !== b.v[i]) diffs.push(FEAT_NAMES[i]);
   }
-  const qi=PAIR_QUIZ[q3O[q3Idx]];
-  document.getElementById('q3-pair').innerHTML=
+  return diffs;
+}
+
+// 그룹 내에서만 쌍 생성 (차이 1~4개인 쌍만)
+function buildPairsFromGroup(group) {
+  const pairs = [];
+  for (let i = 0; i < group.length; i++) {
+    for (let j = i + 1; j < group.length; j++) {
+      const diffs = getDiffFeats(group[i], group[j]);
+      if (diffs.length >= 1 && diffs.length <= 4) {
+        pairs.push({ p1: group[i].p, p2: group[j].p, keys: diffs });
+      }
+    }
+  }
+  return pairs;
+}
+
+const CONSONANT_PAIRS = buildPairsFromGroup(PHONEMES.consonants);
+const VOWEL_PAIRS = buildPairsFromGroup([...PHONEMES.vowels, ...PHONEMES.glides]);
+const ALL_PAIRS = [...CONSONANT_PAIRS, ...VOWEL_PAIRS];
+
+const Q3_ROUND_SIZE = 15;
+let q3Pool = [], q3Idx=0, q3C=0, q3T=0;
+
+function initQ3() {
+  // 자음 쌍과 모음+활음 쌍에서 각각 겹치지 않게 섞어서 뽑기
+  const consPicks = shuffle([...CONSONANT_PAIRS]).slice(0, 10);
+  const vowelPicks = shuffle([...VOWEL_PAIRS]).slice(0, 5);
+  q3Pool = shuffle([...consPicks, ...vowelPicks]);
+  q3Idx = 0; q3C = 0; q3T = 0;
+  renderQ3();
+}
+
+function renderQ3() {
+  const tot = Q3_ROUND_SIZE;
+  document.getElementById('prog3').style.width = Math.round(q3Idx / tot * 100) + '%';
+  document.getElementById('prog3-text').textContent = q3Idx + ' / ' + tot;
+  document.getElementById('score3').textContent = q3C + ' / ' + q3T;
+  document.getElementById('q3-input').style.display = '';
+  document.getElementById('q3-submit').style.display = '';
+
+  if (q3Idx >= tot) {
+    document.getElementById('q3-pair').innerHTML = `<div class="complete-box" style="width:100%"><div class="complete-emoji">🎊</div><p>라운드 완료!<br>최종 점수: ${q3C} / ${q3T}</p><button class="retry-btn" onclick="initQ3()">새 문제 뽑기</button></div>`;
+    ['q3-hint','q3-guide'].forEach(id => document.getElementById(id).textContent = '');
+    document.getElementById('q3-input').style.display = 'none';
+    document.getElementById('q3-submit').style.display = 'none';
+    document.getElementById('q3-feedback').style.display = 'none';
+    document.getElementById('q3-ai-feedback').classList.remove('visible');
+    document.getElementById('next3').classList.remove('visible');
+    return;
+  }
+
+  const qi = q3Pool[q3Idx];
+  document.getElementById('q3-pair').innerHTML =
     `<div class="phoneme-bubble a">${qi.p1}</div><div class="vs-badge">vs</div><div class="phoneme-bubble b">${qi.p2}</div>`;
-  document.getElementById('q3-hint').innerHTML=`<span class="hint-icon">💡</span>${qi.hint}`;
-  document.getElementById('q3-guide').textContent=qi.keys.length>1
-    ?`✏️ 정답이 ${qi.keys.length}개예요. 쉼표로 구분해서 입력하세요 (순서 무관)`:'' ;
-  document.getElementById('q3-input').value='';
-  document.getElementById('q3-input').disabled=false;
-  document.getElementById('q3-submit').disabled=false;
-  document.getElementById('q3-feedback').style.display='none';
+  document.getElementById('q3-hint').innerHTML =
+    `<span class="hint-icon">💡</span>두 음소의 변별자질 값을 비교해보세요. 차이나는 자질이 ${qi.keys.length}개 있어요.`;
+  document.getElementById('q3-guide').textContent = qi.keys.length > 1
+    ? `✏️ 정답이 ${qi.keys.length}개예요. 쉼표로 구분해서 입력하세요 (순서 무관)` : '';
+  document.getElementById('q3-input').value = '';
+  document.getElementById('q3-input').disabled = false;
+  document.getElementById('q3-submit').disabled = false;
+  document.getElementById('q3-feedback').style.display = 'none';
   document.getElementById('q3-ai-feedback').classList.remove('visible');
-  document.getElementById('q3-ai-feedback').textContent='';
-  document.getElementById('q3-loading').style.display='none';
+  document.getElementById('q3-ai-feedback').textContent = '';
+  document.getElementById('q3-loading').style.display = 'none';
   document.getElementById('next3').classList.remove('visible');
 }
 async function checkQ3(){
-  const qi=PAIR_QUIZ[q3O[q3Idx]];
+  const qi=q3Pool[q3Idx];
   const input=document.getElementById('q3-input').value.trim();
   if(!input)return;
   document.getElementById('q3-input').disabled=true;
