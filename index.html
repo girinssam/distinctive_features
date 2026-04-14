@@ -102,7 +102,7 @@
   .tab-btn.active.t1 { background: #dcfce7; border-color: #86efac; color: #15803d; }
   .tab-btn.active.t2 { background: #dbeafe; border-color: #93c5fd; color: #1d4ed8; }
   .tab-btn.active.t3 { background: var(--c3l); border-color: var(--c3); color: var(--c3d); }
-  .tab-btn.active.t4 { background: var(--c4l); border-color: var(--c4); color: var(--c4d); }
+  .tab-btn.active.t5 { background: #fce7f3; border-color: #f9a8d4; color: #9d174d; }
 
   /* ── 섹션 ── */
   .section { display: none; }
@@ -465,6 +465,9 @@
   <button class="tab-btn t4" onclick="switchTab('ref',3)">
     <span class="tab-icon">📋</span> 참고표
   </button>
+  <button class="tab-btn t5" onclick="switchTab('bib',4)">
+    <span class="tab-icon">📄</span> 참고문헌
+  </button>
 </div>
 
 <!-- 과제 1 -->
@@ -573,39 +576,39 @@ const FEAT_NAMES = ['공명성','자음성','성절성','지속성','지연개�
 
 const PHONEMES = {
   consonants: [
-    {p:'ㅂ',v:[0,1,0,0,0,null,0,1,0,0,0,0,0,0]},
-    {p:'ㅃ',v:[0,1,0,0,0,null,0,1,1,0,0,0,0,0]},
-    {p:'ㅍ',v:[0,1,0,0,0,null,0,1,1,1,0,0,0,0]},
+    {p:'ㅂ',v:[0,1,0,0,0,0,0,1,0,0,0,0,0,0]},
+    {p:'ㅃ',v:[0,1,0,0,0,0,0,1,1,0,0,0,0,0]},
+    {p:'ㅍ',v:[0,1,0,0,0,0,0,1,1,1,0,0,0,0]},
     {p:'ㄷ',v:[0,1,0,0,0,0,1,1,0,0,0,0,0,0]},
     {p:'ㄸ',v:[0,1,0,0,0,0,1,1,1,0,0,0,0,0]},
     {p:'ㅌ',v:[0,1,0,0,0,0,1,1,1,1,0,0,0,0]},
-    {p:'ㄱ',v:[0,1,0,0,0,null,0,0,0,0,1,0,1,0]},
-    {p:'ㄲ',v:[0,1,0,0,0,null,0,0,1,0,1,0,1,0]},
-    {p:'ㅋ',v:[0,1,0,0,0,null,0,0,1,1,1,0,1,0]},
+    {p:'ㄱ',v:[0,1,0,0,0,0,0,0,0,0,1,0,1,0]},
+    {p:'ㄲ',v:[0,1,0,0,0,0,0,0,1,0,1,0,1,0]},
+    {p:'ㅋ',v:[0,1,0,0,0,0,0,0,1,1,1,0,1,0]},
     {p:'ㅅ',v:[0,1,0,1,0,0,1,1,0,0,0,0,0,0]},
     {p:'ㅆ',v:[0,1,0,1,0,0,1,1,1,0,0,0,0,0]},
     {p:'ㅈ',v:[0,1,0,0,1,0,1,0,0,0,1,0,0,0]},
     {p:'ㅉ',v:[0,1,0,0,1,0,1,0,1,0,1,0,0,0]},
     {p:'ㅊ',v:[0,1,0,0,1,0,1,0,1,1,1,0,0,0]},
-    {p:'ㅁ',v:[1,1,0,0,0,null,0,1,0,0,0,0,0,0]},
+    {p:'ㅁ',v:[1,1,0,0,0,0,0,1,0,0,0,0,0,0]},
     {p:'ㄴ',v:[1,1,0,0,0,0,1,1,0,0,0,0,0,0]},
-    {p:'ㅇ',v:[1,1,0,0,0,null,0,0,0,0,1,0,1,0]},
+    {p:'ㅇ',v:[1,1,0,0,0,0,0,0,0,0,1,0,1,0]},
     {p:'ㄹ',v:[1,1,0,0,0,1,1,1,0,0,0,0,0,0]},
-    {p:'ㅎ',v:[0,1,0,1,null,null,0,0,0,1,0,1,1,0]},
+    {p:'ㅎ',v:[0,1,0,1,0,0,0,0,0,1,0,1,1,0]},
   ],
   vowels: [
-    {p:'ㅣ',v:[1,0,1,1,null,null,0,0,0,0,1,0,0,0]},
-    {p:'ㅔ/ㅐ',v:[1,0,1,1,null,null,0,0,0,0,0,0,0,0]},
-    {p:'ㅡ',v:[1,0,1,1,null,null,0,0,0,0,1,0,1,0]},
-    {p:'ㅓ',v:[1,0,1,1,null,null,0,0,0,0,0,0,1,0]},
-    {p:'ㅜ',v:[1,0,1,1,null,null,0,0,0,0,1,0,1,1]},
-    {p:'ㅗ',v:[1,0,1,1,null,null,0,0,0,0,0,0,1,1]},
-    {p:'ㅏ',v:[1,0,1,1,null,null,0,0,0,0,0,1,1,0]},
+    {p:'ㅣ',v:[1,0,1,1,0,0,0,0,0,0,1,0,0,0]},
+    {p:'ㅔ/ㅐ',v:[1,0,1,1,0,0,0,0,0,0,0,0,0,0]},
+    {p:'ㅡ',v:[1,0,1,1,0,0,0,0,0,0,1,0,1,0]},
+    {p:'ㅓ',v:[1,0,1,1,0,0,0,0,0,0,0,0,1,0]},
+    {p:'ㅜ',v:[1,0,1,1,0,0,0,0,0,0,1,0,1,1]},
+    {p:'ㅗ',v:[1,0,1,1,0,0,0,0,0,0,0,0,1,1]},
+    {p:'ㅏ',v:[1,0,1,1,0,0,0,0,0,0,0,1,1,0]},
   ],
   glides: [
-    {p:'j',v:[1,0,0,1,null,null,0,0,0,0,1,0,0,0]},
-    {p:'w',v:[1,0,0,1,null,null,0,0,0,0,1,0,1,1]},
-    {p:'ɰ',v:[1,0,0,1,null,null,0,0,0,0,1,0,1,0]},
+    {p:'j',v:[1,0,0,1,0,0,0,0,0,0,1,0,0,0]},
+    {p:'w',v:[1,0,0,1,0,0,0,0,0,0,1,0,1,1]},
+    {p:'ɰ',v:[1,0,0,1,0,0,0,0,0,0,1,0,1,0]},
   ]
 };
 
@@ -902,8 +905,26 @@ initQ1();initQ2();initQ3();
 showRef('consonants',document.querySelector('.ref-tab'));
 </script>
 
-<footer style="text-align:center; padding: 2rem 1rem 2.5rem; font-size: 13px; color: #3d6652; line-height: 1.8; border-top: 1px solid #c3e6cf; margin-top: 1rem;">
-  공부하시다가 오류를 발견하는 경우, 인스타그램 <a href="https://instagram.com/slp_girin" target="_blank" style="color:#15803d; font-weight:500; text-decoration:none;">@slp_girin</a> 이나 이메일(<a href="mailto:leemijin1006@naver.com" style="color:#15803d; font-weight:500; text-decoration:none;">leemijin1006@naver.com</a>)로 말씀주시면 됩니다 😊
+<!-- 참고문헌 -->
+<div id="tab-bib" class="section">
+  <div class="container">
+    <div class="quiz-card">
+      <div class="quiz-tag" style="background:#fce7f3;color:#9d174d;">참고문헌</div>
+      <div style="display:grid;gap:12px;margin-top:0.5rem;">
+        <div style="background:#fdf6f9;border:1.5px solid #f9a8d4;border-radius:12px;padding:18px 22px;line-height:1.9;font-size:14px;color:var(--text);">
+          김수진, 신지영 (2020). <em>말소리장애</em> (제2판). (주)시그마프레스.
+        </div>
+        <div style="background:#fdf6f9;border:1.5px solid #f9a8d4;border-radius:12px;padding:18px 22px;line-height:1.9;font-size:14px;color:var(--text);">
+          신혜정, 권미지, 김시영, 김유경, 박상희, 박현, 이은경, 이지윤 (2023). <em>조음음운장애</em>. (주)학지사.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="text-align:center; padding: 2rem 1rem 2.5rem; font-size: 13px; color: #3d6652; line-height: 2; border-top: 1px solid #c3e6cf; margin-top: 1rem;">
+  <div>본 사이트는 비영리 학습 목적의 사이트입니다.</div>
+  <div>문의처 : 인스타그램 <a href="https://instagram.com/slp_girin" target="_blank" style="color:#15803d; font-weight:500; text-decoration:none;">@slp_girin</a>&nbsp;&nbsp;이메일 <a href="mailto:leemijin1006@naver.com" style="color:#15803d; font-weight:500; text-decoration:none;">leemijin1006@naver.com</a></div>
 </footer>
 </body>
 </html>
